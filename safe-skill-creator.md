@@ -381,8 +381,8 @@ safe-skill-creator/
     ├── comparator.md  ← Blind A/B comparison between outputs
     └── analyzer.md    ← Why one version beat another
 └── references/
-    ├── schemas.md             ← JSON structures for evals.json, grading.json, etc.
-    └── claude-env.md ← Environment-specific execution, testing, and optimization logic
+    ├── schemas.md     ← JSON structures for evals.json, grading.json, etc.
+    └── claude-env.md  ← Environment-specific execution, testing, and optimization logic
 └── assets/
     └── eval_review.html ← Template for trigger eval review UI
 ```
