@@ -12,6 +12,7 @@ Grounded in four design strategies: **Processing** · **Mediation** · **Forgett
 | `safe-skill-creator.md` | Content — philosophy, 8-phase lifecycle, integrity checks |
 | `safe-skill-creator.skill` | Packaged archive for claude.ai upload |
 | `references/claude-env.md` | Claude environment specific tests and optimizations |
+| `.github/workflows/build-skill.yml` | CI workflow — auto-builds and publishes `safe-skill-creator.skill` on push |
 | `README.md` | Explanatory instructions and overview for this software package |
 
 ## Install
@@ -65,7 +66,7 @@ Directives use the following section headers with numbered lists, shared across 
 
 ## License
 
-See [LICENSE](./LICENSE).
+See [LICENSE](./LICENSE). (C) Copyright 2026 - Sameer Khan - Various and Several Rights Reserved.
 
 ---
-README.md v2.1.0 - Human Approved
+README.md v2.2.0 - Human Approved
