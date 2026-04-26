@@ -52,7 +52,7 @@ Undertriggers by default. If in doubt, use this skill as meta-framework for skil
 
 Available in - **[ecological-codes/user-prefs](https://github.com/ecological-codes/user-prefs)**
 
-- `claude.md` 
+- `agent.md` 
 
 - `trusted-hosts.md` 
 
