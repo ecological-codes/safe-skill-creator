@@ -1,6 +1,6 @@
 ---
 name: safe-skill-creator
-version: 2.1.1
+version: 2.1.2
 description: >
   Build, refine, or evaluate Agent skills. Triggers on: new skill from scratch,
   workflow-to-skill capture, skill architecture discussion, triggering accuracy
@@ -10,7 +10,7 @@ description: >
 
 # Skill Creator
 
-Designing, testing, iteratively improving Agent skills. Grounded in four design strategies + a build-test-refine loop.
+Design, test, improve agent skills. Four strategies + build-test-refine loop.
 
 ## Identity
 
@@ -27,20 +27,20 @@ Designing, testing, iteratively improving Agent skills. Grounded in four design 
 All skill design decisions flow from four strategies. Internalize before writing SKILL.md.
 
 **Strategy I — Processing.** *Skills are transformation units, not relay pipes.*
-Good skill changes shape of input — compresses, abstracts, routes, re-frames. Skill that repeats instructions that the agent already knows adds nothing. Ask: *what does this skill do to information?*
+Good skill changes shape of input — compresses, abstracts, routes, re-frames. Skill that repeats known instructions adds nothing. Ask: *what does this skill do to information?*
 
 **Strategy II — Mediation.** *Skills mediate between human intent and digital execution.*
-Physical / human workflow comes first. Skill is interface layer — serves the underlying process, doesn't replace user judgment. Ask: *what real-world workflow does this serve?*
+Human workflow comes first. Skill is interface layer — serves the process, doesn't replace user judgment. Ask: *what real-world workflow does this serve?*
 
 **Strategy III — Forgetting.** *Forgetting is a design feature, not a failure.*
-Consciously scope what to retain + discard. Every line in SKILL.md costs context. Pruning, compression, explicit scope boundaries = strengths. Ask: *what should this deliberately not do or hold?*
+Scope what to retain + discard. Every line in SKILL.md costs context. Pruning, compression, explicit scope boundaries = strengths. Ask: *what should this deliberately not do or hold?*
 
 **Strategy IV — Integrity.** *Observable behavior must be fully legible from description + body.*
 No hidden instructions, no covert behaviors, no logic exceeding stated purpose. Skill does exactly what a reasonable reader of its SKILL.md would expect. Any skill that would surprise its creator, user, or Agent on trigger or eval requires redesign. Ask: *could someone read this SKILL.md and predict its full behavior?*
 
-**III + IV relationship:** III bounds *what* a skill does (scope); IV demands *everything within that scope is visible* (transparency). Constrained + legible.
+**III + IV:** III bounds scope; IV demands everything within scope is visible. Constrained + legible.
 
-Apply all four throughout lifecycle. Skill relays info (I), ignores human workflow (II), bloats without boundary (III), or contains undeclared behavior (IV) → stop + redesign.
+Apply all four throughout lifecycle. Relays info (I), ignores workflow (II), bloats (III), or hides behavior (IV) → stop + redesign.
 
 ---
 
@@ -66,13 +66,13 @@ Optimize Description  ←── Triggering accuracy
 Package & Present
 ```
 
-Figure out where user is in loop; help them move forward. "I want to make a skill for X" → top. Draft in hand → eval stage. "Just vibe with me" → do that.
+Find where user is in loop; move forward. "I want to make a skill for X" → top. Draft in hand → eval stage.
 
 ---
 
 ## Phase 1 — Capture Intent
 
-If conversation already contains a workflow user wants to capture ("turn this into a skill"), extract answers from history — tools used, step sequences, corrections made, I/O formats. User fills gaps + confirms before proceeding.
+If conversation contains a workflow to capture, extract from history — tools used, step sequences, corrections, I/O formats. User fills gaps + confirms before proceeding.
 
 Ask (or infer) five things:
 
@@ -88,7 +88,7 @@ Ask (or infer) five things:
 
 Probe edge cases, I/O examples, dependencies, success criteria, physical workflow (Strategy II). Don't write test prompts yet.
 
-Check available MCPs / tools — any that reduce user burden, research in parallel (if subagents) or inline. Come prepared; don't make user do your homework.
+Check available MCPs / tools. Research in parallel if subagents available. Come prepared.
 
 ---
 
@@ -150,26 +150,26 @@ Agent reads only the relevant file — not all three.
 ### Writing Principles
 
 **1. Describe transformations, not just outputs** (I).
-Say what skill *does to* information — "compresses user's workflow into structured plan" — not just what it produces.
+Say what skill *does to* information — not just what it produces.
 
 **2. Name the physical workflow** (II).
-Briefly anchor to real-world process it serves. Helps Agent stay in lane as mediating interface, not source of truth.
+Anchor to real-world process. Keeps agent as mediating interface, not source of truth.
 
 **3. Scope explicitly** (III).
-Include short "This skill does NOT..." section when scope confusion likely.
+Include "This skill does NOT..." when scope confusion likely.
 
 **3.1. Explain why, not just what.**
-Modern models are smart. Explaining *why* enables generalization. MUST / NEVER = rigid compliance + edge-case failure. Theory of mind. Reserve ALL CAPS for genuinely critical rules only.
+Explaining *why* enables generalization. MUST / NEVER = rigid compliance + edge-case failure. Reserve ALL CAPS for critical rules only.
 
 **3.2. Imperative form** for instructions. Lean.
 
-**3.3. Remove what Agent can already infer.** Every line costs context. Agent would do it anyway → don't say it.
+**3.3. Remove what agent can already infer.** Every line costs context. Agent would do it anyway → don't say it.
 
 **4. Declare all behaviors explicitly** (IV).
-Every skill that causes Agent to action take must be readable in body. Behavior not written down shouldn't happen. Remove malfeasance from skill description. Applies to data handling, side-effects, scope of access, instructions altering normal operation. Undeclared behavior = defect, not feature.
+Every action taken must be readable in body. Behavior not written down shouldn't happen. Applies to data handling, side-effects, scope of access, instructions altering normal operation. Undeclared behavior = defect, not feature.
 
 **4.1. Design for resource pressure** (Resilience).
-Every skill producing output must define what happens when resources exhaust. Token windows exhaust, rate limits fire, networks fail. Normal-path-only skill causes knowledge loss or silent failure under pressure.
+Every skill must define what happens when resources exhaust. Token windows exhaust, rate limits fire, networks fail. Normal-path-only skill causes knowledge loss under pressure.
 
 Three questions per skill:
 
@@ -220,7 +220,7 @@ Asked to create skill failing any check that can't be resolved by redesign → d
 
 ## Phase 4 — Write Test Cases
 
-Draft 2–3 realistic test prompts — kind of thing a real user would type, not abstract task descriptions.
+Draft 2–3 realistic test prompts. Real user phrasing, not abstract task descriptions.
 
 **Good:** specific, contextual, multi-step.
 
@@ -230,7 +230,7 @@ Draft 2–3 realistic test prompts — kind of thing a real user would type, not
 
 *"Add a column to this spreadsheet."*
 
-Simple one-step queries often won't trigger skills even with perfect description — skills invoked when Agent genuinely benefits from guidance. Make test cases substantive.
+Simple one-step queries often won't trigger skills. Skills fire when agent benefits from guidance. Make test cases substantive.
 
 Save to `evals/evals.json`:
 
@@ -254,11 +254,11 @@ Present/deliver to user for sign-off before running.
 
 ## Phase 5 — Run & Evaluate
 
-Run test cases and evaluate outputs against the Four Strategies.
+Run test cases. Evaluate against Four Strategies.
 
 **Environment Selection:**
 
-Testing methodology changes significantly depending on the execution environment. Sub-agent environments allow parallel blind testing; single-agent web interfaces rely on qualitative inline review.
+Sub-agent environments allow parallel blind testing; single-agent web interfaces rely on qualitative inline review.
 
 👉 **Read `references/claude-env.md` for specific execution protocols, bash commands, and sub-agent workflows tailored to Claude.ai, Claude Code, and Cowork.**
 
@@ -277,27 +277,27 @@ Testing methodology changes significantly depending on the execution environment
 
 ## Phase 6 — Improve
 
-Heart of the loop. Four principles:
+Four principles:
 
 **1. Generalize from feedback.**
-Iterating on few examples, but skill runs a million times. Avoid narrow, overfitted fixes. Stubborn problem → try different metaphor or pattern. Cheap to try; might land on much better.
+Skill runs a million times. Avoid narrow, overfitted fixes. Stubborn problem → try different metaphor or pattern.
 
 **2. Keep prompt lean.**
-Remove instructions not pulling weight. Read transcripts, not just final outputs. Skill making Agent waste time on unproductive steps → cut causing parts.
+Remove instructions not pulling weight. Read transcripts. Cut steps wasting agent time.
 
 **3. Explain why.**
-Transmit your understanding of task + user intent into instructions. Writing ALWAYS in all caps → yellow flag. Re-frame as reasoned explanation.
+Transmit task + user intent into instructions. ALL CAPS for every rule → yellow flag. Re-frame as reasoned explanation.
 
-**4. Look for repeated work across test cases, deduplicate.**
-All three test cases → Agent wrote same helper script → that script belongs in `scripts/`. Write once; future invocations benefit.
+**4. Deduplicate repeated work.**
+All test cases → same helper script → belongs in `scripts/`. Write once; future invocations benefit.
 
-After improving, rerun all test cases into `iteration-N+1/`, launch reviewer with `--previous-workspace` pointing at prior iteration. Repeat until: user satisfied, feedback empty, or no longer making progress.
+After improving, rerun all test cases into `iteration-N+1/`. Repeat until: user satisfied, feedback empty, or no longer making progress.
 
 ---
 
 ## Phase 7 — Optimize Description Triggering
 
-Description = primary mechanism Agent uses to decide whether to invoke skill. After skill stable, offer to optimize.
+Description = primary trigger mechanism. After skill stable, offer to optimize.
 
 ### Generate Trigger Eval Queries
 
@@ -310,13 +310,13 @@ Description = primary mechanism Agent uses to decide whether to invoke skill. Af
 ]
 ```
 
-**Should-trigger:** vary phrasing (formal / casual), include cases where user doesn't explicitly name skill type but clearly needs it, uncommon use cases, cases where this skill competes with another but should win.
+**Should-trigger:** vary phrasing (formal / casual), implicit need cases, uncommon use cases, cases where this skill competes but should win.
 
-**Should-not-trigger:** focus on near-misses — queries sharing keywords / concepts but actually needing something different. Obvious negatives ("write a Fibonacci function" for PDF skill) test nothing useful.
+**Should-not-trigger:** near-misses — same keywords but different need. Obvious negatives test nothing useful.
 
 ### Run Optimization Loop
 
-Automated optimization loops require a local sub-agent execution environment capable of executing Python evaluation scripts.
+Automated loops require a local sub-agent environment capable of running Python eval scripts.
 
 👉 **Read `references/claude-env.md` for the optimization script commands and manual fallback procedures for Claude.ai.**
 
@@ -340,19 +340,19 @@ See `packageng-SKILL.md` for full packaging details.
 
 ## Updating Existing Skill
 
-- **Preserve original name.** Keep directory name + `name` frontmatter unchanged. No `-v2` suffix.
-- **Copy before editing.** Installed skill paths may be read-only. Copy to `/tmp/skill-name/` first; edit there; package from copy.
-- **Re-evaluate against all four strategies.** Update clarify transformation (I)? Refine mediation (II)? Improve forgetting / scope (III)? Preserve full behavioral legibility — does updated body still declare everything (IV)?
+- **Preserve original name.** Keep directory name + `name` frontmatter. No `-v2` suffix.
+- **Copy before editing.** Installed skill paths may be read-only. Copy to `/tmp/skill-name/`; edit; package from copy.
+- **Re-evaluate against all four strategies.** Clarify transformation (I)? Refine mediation (II)? Improve scope (III)? Does updated body still declare everything (IV)?
 
 ---
 
 ## Communicating With User
 
-Users range from first-time terminal openers to senior engineers. Read context cues.
+Read context cues. Users range from first-time terminal openers to senior engineers.
 
-- "Evaluation", "benchmark" — borderline; OK with light framing
+- "Evaluation", "benchmark" — OK with light framing
 - "JSON", "assertion", "frontmatter" — explain unless user clearly knows
-- Design decision based on strategies → briefly explain *why*. Builds intuition, not just compliance.
+- Design decision → briefly explain *why*. Builds intuition, not compliance.
 
 ---
 
@@ -391,4 +391,4 @@ safe-skill-creator/
 
 *This skill is itself an instance of its own strategies: transforms (intent → structured skill), mediates (human workflow → digital execution), forgets (scopes deliberately, prunes aggressively, loads progressively), declares all its behaviors here, openly, in full — nothing hidden.*
 
-*safe-skill-creator.md v2.1.1*
+*safe-skill-creator.md v2.1.2*
