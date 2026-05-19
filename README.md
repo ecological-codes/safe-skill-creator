@@ -47,6 +47,8 @@ Undertriggers by default. If in doubt, use this skill as meta-framework for skil
 - **[prompteng](https://github.com/ecological-codes/prompteng)** — parent skill; §6 persistence formats
 - **[captureng](https://github.com/ecological-codes/captureng)** — capture sessions into skills
 - **[packageng](https://github.com/ecological-codes/packageng)** — package finished skills into `.skill`
+- **[scribeng](https://github.com/ecological-codes/scribeng)** — agent scribe; Entire-compatible session checkpoint + sessionlog
+- **[export-memories](https://github.com/ecological-codes/export-memories)** — cross-session transcript synthesis
 
 ## Companion Files
 
